@@ -1,5 +1,10 @@
 import google.generativeai as genai
 from financial_data_service import get_financials
+import os
+import json
+from datetime import datetime
+
+ANALYSIS_DIR = "analysis_reports"
 
 class AnalysisAgent:
     def __init__(self, api_key):
@@ -8,7 +13,7 @@ class AnalysisAgent:
 
     def analyze_stock(self, ticker):
         """
-        Performs a comprehensive analysis of a stock using a generative model.
+        Performs a comprehensive analysis of a stock using a generative model and saves it to a JSON file.
         """
         print(f"Performing comprehensive analysis for {ticker}...")
 
@@ -49,6 +54,30 @@ class AnalysisAgent:
         try:
             print("Generating analysis with Gemini...")
             response = self.model.generate_content(prompt)
-            return response.text
+            analysis_text = response.text
+
+            # 4. Save the analysis to a JSON file
+            os.makedirs(ANALYSIS_DIR, exist_ok=True)
+            timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
+            base_filename = os.path.join(ANALYSIS_DIR, f"{ticker}_{timestamp}")
+
+            # Save as JSON
+            json_filename = f"{base_filename}.json"
+            report_data = {
+                "ticker": ticker,
+                "timestamp": timestamp,
+                "analysis": analysis_text
+            }
+            with open(json_filename, 'w') as f:
+                json.dump(report_data, f, indent=4)
+            print(f"Analysis saved to {json_filename}")
+
+            # Save as Markdown
+            md_filename = f"{base_filename}.md"
+            with open(md_filename, 'w') as f:
+                f.write(analysis_text)
+            print(f"Analysis saved to {md_filename}")
+
+            return analysis_text
         except Exception as e:
             return f"Error generating analysis: {e}"
