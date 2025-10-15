@@ -29,19 +29,19 @@ def get_earnings_calendar(tickers):
 
 def get_financials(ticker):
     """
-    Gets historical financial data (income statement) for a given ticker.
+    Gets historical financial data (quarterly income statement) for a given ticker.
 
     Args:
         ticker (str): The stock ticker symbol.
 
     Returns:
-        pd.DataFrame: A pandas DataFrame containing the annual income statement.
+        pd.DataFrame: A pandas DataFrame containing the quarterly income statement.
     """
     stock = yf.Ticker(ticker)
     try:
-        income_statement = stock.financials
-        if income_statement is not None and not income_statement.empty:
-            return income_statement.loc[['Total Revenue', 'EBITDA']]
+        quarterly_income_statement = stock.quarterly_financials
+        if quarterly_income_statement is not None and not quarterly_income_statement.empty:
+            return quarterly_income_statement
         else:
             return None
     except Exception as e:

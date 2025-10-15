@@ -4,6 +4,7 @@ from dotenv import load_dotenv
 from trading212_service import Trading212
 from news_service import NewsService
 from agents.news_agent import NewsAgent
+from agents.analysis_agent import AnalysisAgent
 import financial_data_service as fds
 import pandas as pd
 
@@ -23,6 +24,10 @@ def main():
     # Financials command
     parser_financials = subparsers.add_parser('financials', help='Get historical financials for a stock.')
     parser_financials.add_argument('symbol', type=str, help='Stock symbol to get financials for.')
+
+    # Analyze command
+    parser_analyze = subparsers.add_parser('analyze', help='Perform a comprehensive analysis of a stock.')
+    parser_analyze.add_argument('symbol', type=str, help='Stock symbol to analyze.')
 
     args = parser.parse_args()
 
@@ -67,6 +72,11 @@ def main():
             print(financials)
         else:
             print(f"Could not retrieve financials for {args.symbol}")
+
+    elif args.command == 'analyze':
+        analysis_agent = AnalysisAgent(gemini_api_key)
+        analysis = analysis_agent.analyze_stock(args.symbol)
+        print(analysis)
 
     else:
         parser.print_help()
