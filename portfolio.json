@@ -1,7 +1,0 @@
-{
-  "stocks": [
-    {"symbol": "AAPL", "shares": 10},
-    {"symbol": "GOOGL", "shares": 5},
-    {"symbol": "MSFT", "shares": 8}
-  ]
-}
