@@ -1,9 +1,9 @@
 import google.generativeai as genai
 
-class LLMAgent:
+class NewsAgent:
     def __init__(self, api_key):
         genai.configure(api_key=api_key)
-        self.model = genai.GenerativeModel('gemini-pro')
+        self.model = genai.GenerativeModel('gemini-2.5-pro')
 
     def summarize_news(self, articles):
         """Summarizes a list of news articles using a generative model."""
@@ -19,4 +19,3 @@ class LLMAgent:
             return response.text
         except Exception as e:
             return f"Error summarizing news: {e}"
-
