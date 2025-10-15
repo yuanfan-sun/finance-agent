@@ -1,3 +1,5 @@
 .env
 __pycache__/
-.idea/"gemini.md" 
+.idea/
+gemini.md
+portfolio.json
