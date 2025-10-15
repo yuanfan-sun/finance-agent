@@ -5,6 +5,7 @@ from trading212_service import Trading212
 from news_service import NewsService
 from agents.news_agent import NewsAgent
 import financial_data_service as fds
+import pandas as pd
 
 def main():
     """Main function to run financial agent commands."""

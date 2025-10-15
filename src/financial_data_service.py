@@ -18,8 +18,8 @@ def get_earnings_calendar(tickers):
         try:
             calendar = stock.calendar
             # yfinance can return a dict. Check for that and extract the date.
-            if isinstance(calendar, dict) and calendar.get('Earnings') and calendar['Earnings'].get('Earnings Date'):
-                earnings_dates[ticker] = pd.to_datetime(calendar['Earnings']['Earnings Date'][0])
+            if isinstance(calendar, dict) and calendar.get('Earnings Date') and calendar['Earnings Date'][0]:
+                earnings_dates[ticker] = pd.to_datetime(calendar['Earnings Date'][0])
             # The expected response is a DataFrame.
             elif isinstance(calendar, pd.DataFrame) and not calendar.empty:
                 earnings_dates[ticker] = calendar.iloc[0, 0]
