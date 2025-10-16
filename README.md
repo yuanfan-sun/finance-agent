@@ -41,16 +41,20 @@ The Finance Agent CLI is a Python-based command-line interface tool designed to 
 
 ## Configuration
 
-This project requires API keys for Trading 212 and Gemini. Create a `.env` file in the project root directory with the following content:
+This project requires API keys for Trading 212, Gemini, and your chosen news provider. Create a `.env` file in the project root directory with the following content:
 
 ```dotenv
 TRADING212_API_KEY="your_trading212_api_key"
 TRADING212_API_SECRET="your_trading212_api_secret"
 GEMINI_API_KEY="your_gemini_api_key"
+NEWSAPI_KEY="your_newsapi_key"
+ALPHAVANTAGE_API_KEY="your_alphavantage_api_key"
 ```
 
 *   **TRADING212_API_KEY/SECRET**: Obtain these from your Trading 212 account settings.
 *   **GEMINI_API_KEY**: Obtain this from the Google AI Studio or Google Cloud Console.
+*   **NEWSAPI_KEY**: Obtain a free key from [newsapi.org](https://newsapi.org/).
+*   **ALPHAVANTAGE_API_KEY**: Obtain a free key from [alphavantage.co](https://www.alphavantage.co/support/#api-key).
 
 ## Usage
 
@@ -58,10 +62,21 @@ All commands are run via `python src/main.py <command> [arguments]`.
 
 ### 1. Get News Summaries for Your Portfolio
 
-Fetches recent news for all stock instruments in your Trading 212 portfolio and provides AI-generated summaries.
+Fetches recent news for all stock instruments in your Trading 212 portfolio and provides AI-generated summaries. You can specify the news source and a lookback period in days.
 
+**Default (5 most recent articles in the last 30 days from yfinance):**
 ```bash
 python src/main.py news
+```
+
+**Specify a news source (newsapi, alphavantage, yfinance):**
+```bash
+python src/main.py news --source newsapi
+```
+
+**Specify a lookback period (e.g., 7 days):**
+```bash
+python src/main.py news --source alphavantage --days 7
 ```
 
 ### 2. Get Upcoming Earnings Dates for Your Portfolio
@@ -99,9 +114,12 @@ Example filename format: `analysis_reports/AAPL_20251015_195438.json` and `analy
 
 ## Caching
 
-To comply with API rate limits, responses from the Trading 212 API (portfolio and instrument data) are cached locally in `portfolio.json` and `instruments.json` files. These caches expire after 1 hour. Subsequent calls within this period will load data from the cache instead of making new API requests.
+To comply with API rate limits and improve performance, responses from APIs are cached locally.
 
-**Note:** The cache files (`*.json`) are automatically added to `.gitignore` and should not be committed to version control.
+*   **Trading 212 Data**: `portfolio.json` and `instruments.json` cache Trading 212 data for 1 hour.
+*   **News Data**: News articles are cached in the `news_cache/` directory for 1 hour.
+
+**Note:** The cache files (`*.json`, `news_cache/`) are automatically added to `.gitignore` and should not be committed to version control.
 
 ## Contributing
 

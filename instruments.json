@@ -53401,7 +53401,7 @@
         "currencyCode": "USD",
         "name": "Praxis Precision Medicines",
         "shortName": "PRAX",
-        "maxOpenQuantity": 20752.0,
+        "maxOpenQuantity": 8000.0,
         "addedOn": "2020-10-16T10:59:55.000+03:00"
     },
     {
@@ -53786,7 +53786,7 @@
         "currencyCode": "USD",
         "name": "Adaptimmune Therapeutics",
         "shortName": "ADAP",
-        "maxOpenQuantity": 964286.0,
+        "maxOpenQuantity": 241000.0,
         "addedOn": "2020-10-06T18:50:56.000+03:00"
     },
     {
@@ -65039,7 +65039,7 @@
         "currencyCode": "USD",
         "name": "Mira Pharmaceuticals",
         "shortName": "MIRA",
-        "maxOpenQuantity": 52226.0,
+        "maxOpenQuantity": 8000.0,
         "addedOn": "2023-08-03T17:34:00.000+03:00"
     },
     {
@@ -78839,7 +78839,7 @@
     {
         "ticker": "ZSPC_US_EQ",
         "type": "STOCK",
-        "workingScheduleId": 109,
+        "workingScheduleId": 110,
         "isin": "US98980W1071",
         "currencyCode": "USD",
         "name": "Zspace",
@@ -99183,7 +99183,7 @@
         "currencyCode": "USD",
         "name": "Vivakor",
         "shortName": "VIVK",
-        "maxOpenQuantity": 237678.0,
+        "maxOpenQuantity": 80000.0,
         "addedOn": "2022-02-15T17:42:00.000+02:00"
     },
     {
@@ -101115,9 +101115,9 @@
         "ticker": "LOBO_US_EQ",
         "type": "STOCK",
         "workingScheduleId": 110,
-        "isin": "VGG003501019",
+        "isin": "VGG003501191",
         "currencyCode": "USD",
-        "name": "Lobo EV Technologies",
+        "name": "Lobo Technologies",
         "shortName": "LOBO",
         "maxOpenQuantity": 1341.0,
         "addedOn": "2024-04-03T18:38:14.000+03:00"
@@ -135362,7 +135362,7 @@
         "currencyCode": "USD",
         "name": "Veritone",
         "shortName": "VERI",
-        "maxOpenQuantity": 357235.0,
+        "maxOpenQuantity": 264705.0,
         "addedOn": "2018-07-04T21:06:14.000+03:00"
     },
     {

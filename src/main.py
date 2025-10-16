@@ -16,7 +16,9 @@ def main():
     subparsers = parser.add_subparsers(dest='command')
 
     # News command
-    subparsers.add_parser('news', help='Get news summaries for the portfolio.')
+    parser_news = subparsers.add_parser('news', help='Get news summaries for the portfolio.')
+    parser_news.add_argument('--source', type=str, default='yfinance', choices=['yfinance', 'newsapi', 'alphavantage'], help='The news source to use.')
+    parser_news.add_argument('--days', type=int, help='Number of recent days to fetch news for.')
 
     # Earnings calendar command
     subparsers.add_parser('earnings_calendar', help='Get the earnings calendar for the portfolio.')
@@ -50,7 +52,7 @@ def main():
         news_service = NewsService()
         news_agent = NewsAgent(gemini_api_key)
         for ticker in portfolio_tickers:
-            news = news_service.get_news(ticker)
+            news = news_service.get_news(ticker, source=args.source, days=args.days)
             summary = news_agent.summarize_news(news)
             print(f"\nNews for {ticker}:")
             print(summary)

@@ -12,7 +12,7 @@ class NewsAgent:
 
         prompt = "Summarize the following news articles in a single paragraph, focusing on the key financial takeaways:\n"
         for article in articles:
-            prompt += f"- {article['content']['title']}\n"
+            prompt += f"- {article['title']}\n"
 
         try:
             response = self.model.generate_content(prompt)
