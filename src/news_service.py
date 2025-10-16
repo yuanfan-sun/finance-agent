@@ -61,6 +61,7 @@ class NewsService:
             if not days:
                 filtered_news = filtered_news[:5]
 
+            # yfinance provides a summary, not the full article content. This is standard for news APIs.
             return [{"title": article['title'], "content": article.get('summary', article['title'])} for article in filtered_news]
         except Exception as e:
             print(f"Error fetching news from yfinance: {e}")
@@ -80,6 +81,7 @@ class NewsService:
             response = requests.get(url)
             response.raise_for_status()
             articles = response.json().get('articles', [])
+            # NewsAPI provides a description/snippet, not the full article content.
             return [{"title": article['title'], "content": article.get('description', '') or article['title']} for article in articles]
         except requests.exceptions.RequestException as e:
             print(f"Error fetching news from NewsAPI: {e}")
@@ -103,6 +105,7 @@ class NewsService:
             response.raise_for_status()
             data = response.json()
             articles = data.get('feed', [])
+            # Alpha Vantage provides a summary, not the full article content.
             return [{"title": article['title'], "content": article.get('summary', '') or article['title']} for article in articles]
         except requests.exceptions.RequestException as e:
             print(f"Error fetching news from Alpha Vantage: {e}")
